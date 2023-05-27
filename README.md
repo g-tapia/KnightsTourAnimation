@@ -1,5 +1,10 @@
-# My Coding Journey: Creating the Knight's Tour Animation
+# Visual demonstration
 
+https://github.com/g-tapia/KnightsTourAnimation/assets/78235399/00dbee7d-86ed-48ee-af57-c5bd4165a8ef
+
+
+
+## My Coding Journey: Creating the Knight's Tour Animation
 Have you ever thought about mixing hobbies? Well, that's exactly what I did. I've always had a soft spot for chess, and as someone who loves coding, I found a way to blend these two together. That's how I ended up tackling the Knight's Tour problem - it was the perfect way to mix code and chess.
 
 Here's the fun part: the Knight's Tour problem is all about moving a knight across a chessboard, making sure it visits each square only once. It's like a puzzle - a fun, challenging, sometimes head-scratching puzzle. And, to make it even more interesting, I used a smart strategy called Warnsdorff's rule. This rule says that the knight should always move to a square that has the fewest onward moves, so it doesn't get stuck too soon. Pretty cool, right?
