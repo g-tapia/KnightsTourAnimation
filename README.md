@@ -1,4 +1,7 @@
 # Visual demonstration
+Here is a visual demonstration below. Feel free to run the code yourself by downloading the zip, installing stack ghci, and running stack build to install all the dependencies. Alternatively, you can watch this video for the setup ([Getting started with haskell](https://www.youtube.com/watch?v=YNkMcNM0dJI)). 
+
+My program works for any size dimensions, though, not sure who would want to stick around for a long time to watch it unfold. Especially, if we have a board of size 100 x 100.
 
 https://github.com/g-tapia/KnightsTourAnimation/assets/78235399/00dbee7d-86ed-48ee-af57-c5bd4165a8ef
 
