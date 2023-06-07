@@ -26,9 +26,10 @@ import Foreign.Ptr
 import Data.Vector.Storable (unsafeWith)
 
 
-
+-- setting the custom cell size
 cellSize :: Float
 cellSize = fromIntegral 70
+
 
 -- animate knights tour function passes an initial state to the update function
 animateKnightsTour :: [Board] -> [Board] -> IO ()
@@ -39,6 +40,7 @@ animateKnightsTour openList visited = simulate window (toGlossColor SelectColor.
 
 -- update function builds off the initial state and continues the search
 -- (0,0) represents a buffer value before the search begins
+-- each frameNumber sets off a corresponding animation sequence
 update :: ViewPort -> Float -> (Int, [(Int,Int)], [(Int,Int)], [Board], [Board]) -> (Int,[(Int,Int)], [(Int,Int)], [Board], [Board])
 update _ _ (_, _, _, [], visitedList) = (0, [], [], [], visitedList)
 update _ _ (frameNum, currentNeighbor, remainingNeighbors, openList, visitedList)
@@ -64,11 +66,12 @@ update _ _ (frameNum, currentNeighbor, remainingNeighbors, openList, visitedList
     comb new old = sortOn numberOfPossibleMoves (new ++ old)
     
 
--- animate the model by converting it to a picture
+-- animate the model (currentBoard) by converting it to a picture and returning it
 animateFrame :: (Int, [(Int,Int)], [(Int,Int)], [Board], [Board]) -> Picture
 animateFrame (frameNum, currentNeighbor, remainingNeighbors, currentBoard, _) = draw frameNum (head currentBoard) currentNeighbor
 
 
+-- this function is responsible for returning the pictures that will be animated via simulate function
 draw :: Int -> Board -> [(Int, Int)] -> Picture
 draw frameNum board@(Board dimensions@(w , h) path) currentNeighbor = pictures $ concatMap drawColumn [0 .. h - 1] ++ [drawKnight dimensions $ head path]
   where
@@ -76,7 +79,7 @@ draw frameNum board@(Board dimensions@(w , h) path) currentNeighbor = pictures $
     neighbors = generatePossibleMoves board
     knightPosition = if (frameNum /= 3) then (head path) else (head neighbors)
 
-
+-- return of the image via the path specified
 drawKnight :: (Int, Int) -> (Int, Int) -> Picture
 drawKnight dimensions knightPosition =
   uncurry translate (boardToGloss dimensions knightPosition) knightImage
@@ -94,6 +97,7 @@ boardToGloss (w, h) (x, y) = (fromIntegral x * cellSize - halfBoardWidth + cellS
 (|>) :: a -> (a -> b) -> b
 x |> f = f x
 
+-- responsible for colouring the cells that are visited, open, and targeted
 cellPositionToDraw :: Int -> (Int, Int) -> Board -> [(Int, Int)] -> [(Int, Int)] -> Picture
 cellPositionToDraw frameNumber pos (Board dimensions path) neighbors currentNeighbor = pictures [cellContent, circleColor]
   where
@@ -157,6 +161,7 @@ colorToRGBA c = (toFloat r, toFloat g, toFloat b, toFloat a)
 --                                    Image Resolvers (Knight Image)
 -- ###########################################################################################
 
+
 knightImage :: Picture
 knightImage = unsafePerformIO $ do
   maybePicture <- loadJuicyPNG "C:\\Users\\"  -- add your path here (<-) for the knight image
@@ -164,6 +169,7 @@ knightImage = unsafePerformIO $ do
     Nothing -> error "Failed to load the image."
     Just picture -> return $ scaleImageToFitCell picture
 
+-- scales the current picture to fit the cell
 scaleImageToFitCell :: Picture -> Picture
 scaleImageToFitCell pic@(Bitmap img) =
   let (imgWidth, imgHeight) = bitmapSize img
@@ -176,6 +182,7 @@ scaleImageToFitCell pic@(Bitmap img) =
 --                                    Image Resolvers (Painting)
 -- ###########################################################################################
 
+
 chessBoardImage :: Image PixelRGBA8
 chessBoardImage = unsafePerformIO $ do
   maybePicture <- readImage "C:\\Users\\" -- add your path here (<-) for the background image
@@ -184,6 +191,8 @@ chessBoardImage = unsafePerformIO $ do
     Right img -> return $ convertRGBA8 img
 
 
+-- crops image portion specified by position and dimensions of board
+-- cropping of pixels is done starting at the top left going down/right
 cropImageToCellPosition :: Image PixelRGBA8 -> (Int, Int) -> (Int, Int) -> Picture
 cropImageToCellPosition img (x, y) (w, h) =
   let
