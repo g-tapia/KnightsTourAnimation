@@ -3,10 +3,13 @@ This repository contains my knights' tour animation implementation.
 
 I provided a visual demonstration below. Feel free to run the code yourself by downloading the zip, installing stack ghci, running stack build to install all the dependencies, and lastly, using stack ghci to run the application. Alternatively, you can watch this video for the setup ([Getting started with haskell](https://www.youtube.com/watch?v=YNkMcNM0dJI)). 
 
-My program works for any size dimensions, though, not sure who would want to stick around for a long time to watch it unfold. Especially, if we have a board of size 100 x 100.
+My program works for any size dimensions, though, not sure who would want to stick around for a long time to watch it unfold, especially if we have a board of size 100 x 100.
 
 https://github.com/g-tapia/KnightsTourAnimation/assets/78235399/00dbee7d-86ed-48ee-af57-c5bd4165a8ef
 
+Please note that you might note see some visited squares colored in the beginning. Why is this? this is due to backtracking taking its course. For example, in the beginning, the knight has 8 moves (actions to make), this means that there are 8 different paths to go about, and from those 8 paths, there are various other paths to try until we find a solution. Since warnsdorff's algorithm is considering visiting the cell with the least number of moves first, it tries the first eight cells before it goes deeper down a path. Now from the picture below, you can see that if we explore path one all the way down, it will color various squares, but as soon as no solution is found, it will try a different path and decolor all the previously visited squares.
+
+![tree](https://github.com/g-tapia/KnightsTourAnimation/assets/78235399/44d2d684-f36c-40f8-998c-13d0c6ea673a)
 
 
 ## My Coding Journey: Creating the Knight's Tour Animation
