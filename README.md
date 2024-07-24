@@ -1,16 +1,18 @@
 # Visual demonstration
-This repository contains my knights' tour animation implementation.
 
-I provided a visual demonstration below. Feel free to run the code yourself by downloading the zip, installing stack ghci, running stack build to install all the dependencies, and lastly, using stack ghci to run the application. Alternatively, you can watch this video for the setup ([Getting started with haskell](https://www.youtube.com/watch?v=YNkMcNM0dJI)). 
+This repository features my implementation of the Knights' Tour animation, a classic chess problem where the knight must visit every square on the board exactly once. I added a unique twist by using the Green Knight from "Sir Gawain and the Green Knight" as the image for the visited squares. As the knight searches for a path, it paints each visited square. Before watching my animation that I recorded below, please watch [this video](https://www.youtube.com/watch?v=ab_dY3dZFHM) to understand how the algorithm works.
 
-My program works for any size dimensions, though, not sure who would want to stick around for a long time to watch it unfold, especially if we have a board of size 100 x 100.
+Another note before watching the video: If you click full screen, you can see the calculation of the number of moves available per square, giving you an idea of how the algorithm works. Imagine it like this: it's your turn, and you are about to move the knight (the only piece on the board to solve the knights' tour problem). You look at the available positions from where your knight is at and notice that there are two options on the board. You think, "If I move the knight to the first square, I will have 5 different moves to pick from on my next turn. However, if I move the knight to the second position, I will only have two moves that I can make with the knight on my next turn." With this algorithm, you will always choose the position with the minimum number of moves, so you would select position two. The goal is to keep picking the squares with the least number of moves until you solve the knights' tour problem. However, in this case, you keep going back and trying every possible move you could have made in the past until you find the correct sequence that will get you to solve this problem.
 
 https://github.com/g-tapia/KnightsTourAnimation/assets/78235399/00dbee7d-86ed-48ee-af57-c5bd4165a8ef
 
-Please note that you might note see some visited squares colored in the beginning. Why is this? this is due to backtracking taking its course. For example, in the beginning, the knight has 8 moves (actions to make), this means that there are 8 different paths to go about, and from those 8 paths, there are various other paths to try until we find a solution. Since warnsdorff's algorithm is considering visiting the cell with the least number of moves first, it tries the first eight cells before it goes deeper down a path. Now from the picture below, you can see that if we explore path one all the way down, it will color various squares, but as soon as no solution is found, it will try a different path and decolor all the previously visited squares.
+My program works for any size dimensions, though, not sure who would want to stick around for a long time to watch it unfold, especially if we have a board of size 100 x 100.
 
-![tree](https://github.com/g-tapia/KnightsTourAnimation/assets/78235399/44d2d684-f36c-40f8-998c-13d0c6ea673a)
 
+
+
+
+To run the code yourself, download the zip file, install Stack GHCI, run stack build to install all dependencies, and then use stack ghci to start the application. For a detailed setup guide, you can watch this video ([Getting started with haskell](https://www.youtube.com/watch?v=YNkMcNM0dJI)). 
 
 ## My Coding Journey: Creating the Knight's Tour Animation
 I've always had a soft spot for chess, and as someone who loves coding, I found a way to blend these two together. That's how I ended up tackling the Knight's Tour problem - it was the perfect way to mix code and chess.
